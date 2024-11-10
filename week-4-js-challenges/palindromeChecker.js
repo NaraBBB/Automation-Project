@@ -21,3 +21,5 @@ console.log(palindrome('racecar')); // true
 console.log(palindrome('hello')); // false
 console.log(palindrome('a')); // true
 console.log(palindrome('madam')); // true
+
+palindromeChecker

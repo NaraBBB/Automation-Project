@@ -23,7 +23,7 @@ function printMultuples(){
         }
 
     }
-
+    
 }
 
 printMultuples();
