@@ -2,8 +2,8 @@
 // Challenge 3: reverseArray
 // Write a function that takes an array and returns a new array with the elements in reverse order.
 function reverseArray(arr){
-    const reversed = arr.reverse();
-    return reversed
+   
+    return  arr.reverse();
 }
 
 // Usage examples:
