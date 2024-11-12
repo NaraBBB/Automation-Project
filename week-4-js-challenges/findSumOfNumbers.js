@@ -1,18 +1,13 @@
-
-
 // Challenge 5: Sum of Numbers
 // Write a function to find the sum of all numbers in the array.
 
-function sumNumbers(numbers){
+function sumNumbers(numbers) {
+  let sum = 0;
 
-    let sum =0;
-    
-    for(let i = 0; i < numbers.length; i++){
-        sum = sum + numbers[i];
-
-
-    }
-    return sum;
+  for (let i = 0; i < numbers.length; i++) {
+    sum = sum + numbers[i];
+  }
+  return sum;
 }
 
 // Usage examples:

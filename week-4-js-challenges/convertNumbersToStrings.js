@@ -1,22 +1,15 @@
-
 // Challenge 7: Convert Numbers to Strings
 // Write a function that converts all numbers to strings.
 
+function convertNumbersToStrings(numbers) {
+  let stringNum = "";
 
-function convertNumbersToStrings(numbers){
+  for (let i = 0; i < numbers.length; i++) {
+    stringNum = numbers[i].toString;
+  }
 
-    let stringNum = '';
-    
-    for(let i = 0; i< numbers.length; i++){
- 
-        stringNum = numbers[i].toString
-        
-    }
-
-    return stringNum;
+  return stringNum;
 }
-
-
 
 // Usage examples:
 console.log(convertNumbersToStrings([1, 2, 3, 4, 5])); // ["1", "2", "3", "4", "5"]
