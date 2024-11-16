@@ -1,7 +1,3 @@
-// Challenge 4: Find duplicates in two arrays
-// Write a function that takes two arrays as arguments and returns an array of values
-//that are repeated more than once across the two input arrays
-
 function findDuplicates(array1, array2) {
   let duplicates = [];
   let frequency = {};
