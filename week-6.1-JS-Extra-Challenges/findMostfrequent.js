@@ -1,8 +1,5 @@
 //Challenge 2: Find the most frequent element in a given array
-
 // Write a function to find the most frequent element in the array. If there are multiple elements that appear a maximum number of times, print the first of them
-
-
 function mostFrequent(arr, n){
 let maxCount = 0;
 let frequent = arr[0]
