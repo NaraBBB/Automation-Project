@@ -9,8 +9,6 @@ describe("Login Tests", () => {
     cy.get('[type="submit"]').click();
     cy.get("a p").should("have.text", "role: user");
     cy.title().should("eq", "User: Profile | Delek Homes");
-    cy.title().then((actualTitle) => {
-      console.log("Actual Page Title:", actualTitle);
-    });
+  
   });
 });
