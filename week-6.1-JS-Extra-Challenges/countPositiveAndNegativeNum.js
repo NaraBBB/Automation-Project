@@ -9,7 +9,7 @@ function countNegativeAndPositiveNumbers(arr) {
     }
   }
   console.log(`The negative numbers in an array is ${negativeCount}`);
-  console.log(`The negative numbers in an array is ${positiveCount}`);
+  console.log(`The positive numbers in an array is ${positiveCount}`);
 }
 
 let arr = [10, 20, -1, 22, 99, 20, -9];
