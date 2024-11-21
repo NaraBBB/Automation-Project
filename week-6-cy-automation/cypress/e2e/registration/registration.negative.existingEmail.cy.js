@@ -11,7 +11,6 @@ describe("Registration Tests", () => {
     cy.xpath("//div[text()='Input data validation failed']").should(
       "be.visible"
     );
-
     cy.url().should("include", "/auth/register");
   });
 });
