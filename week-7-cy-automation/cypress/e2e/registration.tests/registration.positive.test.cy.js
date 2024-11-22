@@ -12,7 +12,7 @@ describe("Registration Tests", () => {
    cy.visit("/register");
     cy.fixture("example").as("data");
   });
-  it("Should successfully register a new user and logout", function() {
+  it("Should successfully register a new user and logout after registration", function() {
     homePage.regsPageBtn.click();
 
     registrationPage.regstMethod(
