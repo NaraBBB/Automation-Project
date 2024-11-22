@@ -1,7 +1,3 @@
-import { faker } from "@faker-js/faker";
-const email = faker.internet.email();
-const password = faker.string.uuid();
-
 describe("Registration Tests", () => {
     it("Should not register without filling in required fields", () => {
       cy.visit("/register");
