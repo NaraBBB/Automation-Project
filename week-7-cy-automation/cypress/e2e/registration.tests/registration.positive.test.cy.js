@@ -12,7 +12,19 @@ describe("Registration Tests", () => {
    cy.visit("/register");
     cy.fixture("example").as("data");
   });
-  it("Should successfully register a new user and logout after registration", function() {
+
+  it("Should successfully register a new user", function() {
+    homePage.regsPageBtn.click();
+
+    registrationPage.regstMethod(
+      this.data.valid.firstName, 
+      this.data.valid.lastName,  
+      email,                     
+      password);
+    registrationPage.regstBtn.click();
+   });
+
+   it("Should successfully logout after registration", function () {
     homePage.regsPageBtn.click();
 
     registrationPage.regstMethod(
@@ -24,9 +36,11 @@ describe("Registration Tests", () => {
 
     dashboardPage.userIconMenu.click();
     dashboardPage.logoutBtn.click();
+    
+    cy.url().should('include', '/login');
    });
 
-   it("Should successfully login with registered credentials", function () {
+   it("Should successfully register a new user and log after registration", function () {
     homePage.loginPageBtn.click()
    
     loginPage.loginMethod(email, password);
