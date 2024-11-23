@@ -9,38 +9,35 @@ const password = faker.string.uuid();
 
 describe("Registration Tests", () => {
   beforeEach(() => {
-   cy.visit("/register");
+    cy.visit("/register");
     cy.fixture("example").as("data");
   });
 
-  it("Should successfully register a new user", function() {
+  const registerUser = function (data) {
     homePage.regsPageBtn.click();
-
     registrationPage.regstMethod(
-      this.data.valid.firstName, 
-      this.data.valid.lastName,  
-      email,                     
-      password);
+      data.valid.firstName,
+      data.valid.lastName,
+      email,
+      password
+    );
     registrationPage.regstBtn.click();
-   });
+  };
 
-   it("Should successfully logout after registration", function () {
-    homePage.regsPageBtn.click();
+  it("Should successfully register a new user", function () {
+    registerUser(this.data);
+  });
 
-    registrationPage.regstMethod(
-      this.data.valid.firstName, 
-      this.data.valid.lastName,  
-      email,                     
-      password);
-    registrationPage.regstBtn.click();
-
+  it("Should successfully logout after registration", function () {
+    registerUser(this.data);
+    
     dashboardPage.userIconMenu.click();
     dashboardPage.logoutBtn.click();
     
-    cy.url().should('include', '/login');
-   });
+    cy.url().should("include", "/login");
+  });
 
-   it("Should successfully register a new user and log after registration", function () {
+  it("Should successfully register a new user and log after registration", function () {
     homePage.loginPageBtn.click()
    
     loginPage.loginMethod(email, password);
