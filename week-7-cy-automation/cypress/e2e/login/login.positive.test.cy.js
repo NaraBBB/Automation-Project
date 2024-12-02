@@ -8,6 +8,7 @@ describe("Login Tests", () => {
     cy.visit("/login");
     cy.fixture("example").as("data");
   });
+  
   it("Should successfully login with valid credentials", function () {
     homePage.loginPageBtn.click();
 
