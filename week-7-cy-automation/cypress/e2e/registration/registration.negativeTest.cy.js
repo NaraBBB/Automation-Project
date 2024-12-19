@@ -1,4 +1,4 @@
-import registrationPage from "../../page_objects/registration.page";
+import registrationPage from "../../page_objects/registrationPage";
 
 describe("Registration Tests", () => {
   beforeEach(function () {

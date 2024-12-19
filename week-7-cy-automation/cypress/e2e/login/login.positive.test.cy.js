@@ -1,6 +1,6 @@
-import loginPage from "../../page_objects/login.page";
-import homePage from "../../page_objects/home.page";
-import dashboardPage from "../../page_objects/dashboard.page";
+import loginPage from "../../page_objects/loginPage";
+import homePage from "../../page_objects/homePage";
+import dashboardPage from "../../page_objects/dashboardPage";
 
 describe("Login Tests", () => {
   beforeEach(function () {
@@ -9,11 +9,8 @@ describe("Login Tests", () => {
   });
 
   it("Should successfully login with valid credentials", function () {
-    homePage.loginPageBtn.click();
-
+    homePage.homePageLoginBtn.click();
     loginPage.loginMethod(this.data.valid.email, this.data.valid.password);
-    loginPage.loginBtn.click();
-
     dashboardPage.fullName.should("have.text", "Mara  B");
     dashboardPage.roleLabel.should("have.text", "role: user");
     cy.title().should("eq", "User: Profile | Delek Homes");

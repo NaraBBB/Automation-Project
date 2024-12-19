@@ -1,8 +1,8 @@
 import { faker } from "@faker-js/faker";
-import mainPage from "../../page_objects/main.page";
-import registrationPage from "../../page_objects/registration.page";
-import dashboardPage from "../../page_objects/dashboard.page";
-import loginPage from "../../page_objects/login.page";
+import loginPage from "../../page_objects/loginPage";
+import homePage from "../../page_objects/homePage";
+import dashboardPage from "../../page_objects/dashboardPage";
+import registrationPage from "../../page_objects/registrationPage";
 const email = faker.internet.email();
 const password = faker.string.uuid();
 
@@ -13,7 +13,7 @@ describe("Registration Tests", () => {
   });
 
   it("Should successfully register a new user", function () {
-    mainPage.mainPageRegisterBtn.click();
+    homePage.homePageRegisterBtn.click();
     registrationPage.registerUser(this.data, email, password);
     cy.url().should("include", "dashboard/user/profile");
   });
@@ -21,20 +21,17 @@ describe("Registration Tests", () => {
   it("Should successfully logout after registration", function () {
     const email = faker.internet.email();
     const password = faker.string.uuid();
-    mainPage.mainPageRegisterBtn.click();
-    registrationPage.registerUser(this.data, email, password);
-
+    homePage.homePageRegisterBtn.click();
+    registrationPage.registerUser(this.data, email, password)
     dashboardPage.userIconMenu.click();
     dashboardPage.logoutBtn.click();
-
     cy.url().should("include", "/login");
   });
 
   it("Should successfully register a new user and login after registration", function () {
-    mainPage.mainPageLoginBtn.click();
+    homePage.homePageLoginBtn.click();
     loginPage.loginMethod(email, password);
-
     dashboardPage.hamburgerMenuBtn.click();
-    dashboardPage.fullName.should("have.text", "Sara  Ba");
+    dashboardPage.fullName.should("have.text", "Mara  B");
   });
 });
