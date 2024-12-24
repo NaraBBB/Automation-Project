@@ -1,5 +1,5 @@
-class ListingPage {
-  get nigthMde() {
+class FeaturedListingsPage {
+  get darkTheme() {
     return cy.get('[type="checkbox"]');
   }
   get searchListInp() {
@@ -12,13 +12,10 @@ class ListingPage {
     return cy.get('[class="MuiTypography-root MuiTypography-h5 css-ijss57"]');
   }
   get bedroomsDrpdn() {
-    return cy.get("div[id=':r2:']");
-  }
-  get bedrooms3PlusOpt() {
-    return cy.get('li[data-value="3"]');
+    return cy.get('[id=":r2:"]');
   }
   get selectedBedroomsVal() {
-    return cy.xpath("//div[text()=' Bedrooms: ']");
+    return cy.get('[viewBox="0 0 2048 1280"]');
   }
   get cityInp() {
     return cy.get('input[type="text"]').last();
@@ -27,7 +24,7 @@ class ListingPage {
     return cy.contains("More Info");
   }
   get propertyPrc() {
-    return cy.get(".MuiBox-root.css-6yrxxf");
+    return cy.get(".MuiPaper-rounded div:contains($)");
   }
   get listingDet() {
     return cy
@@ -37,4 +34,4 @@ class ListingPage {
       .first();
   }
 }
-export default new ListingPage();
+export default new FeaturedListingsPage();

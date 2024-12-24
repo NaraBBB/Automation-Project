@@ -1,38 +1,45 @@
 import homePage from "../../page_objects/homePage";
-import listingPage from "../../page_objects/listingPage";
+import featuredListingsPage from "../../page_objects/featuredListingsPage";
 
 describe("Testing Home page", () => {
   beforeEach(function () {
     cy.visit("/");
-    homePage.nigthMde.click();
+    homePage.darkTheme.click();
   });
 
   it("Should search by keyword", () => {
-    homePage.searchInp.type("new windows");
+    homePage.searchInp.type("new windows", { force: true });
     homePage.startSearchBtn.click();
-    listingPage.listedPropt.should(
+    featuredListingsPage.listedPropt.should(
       "be.visible",
       "Brand new single-family residence"
     );
   });
 
   it("Should search by bedrooms", () => {
-    homePage.bedroomsDrpdn.click();
-    homePage.bedrooms2PlusOpt.click();
+    homePage.bedroomsDrpdn.type("2+{enter}");
     homePage.startSearchBtn.click();
-    listingPage.selectedBedroomsVal.should("contain.text", "3");
+    featuredListingsPage.selectedBedroomsVal.parent().each((bedroom) => {
+      cy.wrap(bedroom)
+        .should("have.not.text", "1")
+        .should("have.not.text", "2");
+    });
   });
 
   it("Search Search by price", () => {
     cy.visit("/featured-listings?price=500000-10000000&city=Elgin");
-    listingPage.propertyPrc.contains("$ 3,330,000").should("be.visible");
+    featuredListingsPage.propertyPrc.each((priceElement) => {
+      const price = priceElement.text().replace(/\D/g, "");
+      expect(parseInt(price)).to.be.above(3000000);
+      expect(parseInt(price)).to.be.below(5100000);
+    });
   });
 
   it("Should search by city", () => {
-    homePage.cityInp.type("Elgin").click();
+    homePage.cityInp.type("Elgin", { force: true }).click();
     homePage.startSearchBtn.click();
-    listingPage.moreInfoBtn.click();
-    listingPage.listingDet.within(() => {
+    featuredListingsPage.moreInfoBtn.click();
+    featuredListingsPage.listingDet.within(() => {
       cy.contains("Brand new single-family residence ").should("be.visible");
       cy.contains("310 W Elgin rd").should("be.visible");
       cy.contains(" Asking Price: $ 3,330,000").should("be.visible");

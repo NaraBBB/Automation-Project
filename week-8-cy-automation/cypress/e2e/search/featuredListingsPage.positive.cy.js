@@ -1,36 +1,42 @@
-import listingPage from "../../page_objects/listingPage";
+import featuredListingsPage from "../../page_objects/featuredListingsPage";
 
 describe("Testing Listing page", () => {
   beforeEach(function () {
     cy.visit("/featured-listings");
-    listingPage.nigthMde.click();
+    featuredListingsPage.darkTheme.click();
   });
 
   it("Should search by keyword", () => {
-    listingPage.searchListInp.type("wood grain");
-    listingPage.startSearchBtn.click();
-    listingPage.listedPropt
+    featuredListingsPage.searchListInp.type("wood grain", { force: true });
+    featuredListingsPage.startSearchBtn.click();
+    featuredListingsPage.listedPropt
       .contains(" Single-family home")
       .should("be.visible");
   });
 
   it("Should search by bedrooms", () => {
-    listingPage.bedroomsDrpdn.click();
-    listingPage.bedrooms3PlusOpt.click();
-    listingPage.startSearchBtn.click();
-    listingPage.selectedBedroomsVal.invoke("text").should("contains", "3");
+    featuredListingsPage.bedroomsDrpdn.type("3+{enter}");
+    featuredListingsPage.startSearchBtn.click();
+    featuredListingsPage.selectedBedroomsVal.parent().each((bedroom) => {
+      cy.wrap(bedroom)
+        .should("have.not.text", "1")
+        .should("have.not.text", "2");
+    });
   });
 
   it("Should search by price", () => {
     cy.visit("/featured-listings?price=500000-10000000&city=Niles");
-    listingPage.propertyPrc.contains("$ 7,100,000").should("be.visible");
+    featuredListingsPage.propertyPrc.each((priceElement) => {
+      const price = priceElement.text().replace(/\D/g, "");
+      expect(parseInt(price)).to.be.above(7000000);
+      expect(parseInt(price)).to.be.below(10000000);
+    });
   });
-
   it("Should search by city", () => {
-    listingPage.cityInp.type("Niles").click();
-    listingPage.startSearchBtn.click();
-    listingPage.moreInfoBtn.click();
-    listingPage.listingDet.within(() => {
+    featuredListingsPage.cityInp.type("Niles", { force: true });
+    featuredListingsPage.startSearchBtn.click();
+    featuredListingsPage.moreInfoBtn.click();
+    featuredListingsPage.listingDet.within(() => {
       cy.contains(" Single-family home").should("be.visible");
       cy.contains("311 W Niles rd").should("be.visible");
       cy.contains(" Asking Price: $ 7,100,000").should("be.visible");
