@@ -9,13 +9,14 @@ describe("Create a New Listing via UI", () => {
   it("should allow a user to create a new real estate listing", function () {
     cy.visit("/dashboard/real-estate/new");
     cy.wait(1000);
+
     newRealestatePage.createNewRealEstate(
       "Luxury Apartment",
       "Spacious apartment in NYC",
       "New York",
       "123 Main Street",
       "10001",
-      "uiHouse.png",
+      "luxuryApartment.png",
       "500000",
       "3",
       "2",
@@ -24,6 +25,7 @@ describe("Create a New Listing via UI", () => {
       "5000"
     );
     cy.contains("Post success!").should("be.visible");
+
     cy.url().should("includes", "/real-estate/list");
   });
 });

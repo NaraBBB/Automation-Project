@@ -15,7 +15,7 @@ describe("End-to-End: Create, Search, and Delete a Listing via API", function ()
     cy.log_in();
     cy.fixture("listingData.json").then((data) => {
       listingData = data;
-      cy.fixture("homeAloneHouse.png", "binary").then((image) => {
+      cy.fixture("beautifulHouse.png", "binary").then((image) => {
         const blob = Cypress.Blob.binaryStringToBlob(image);
 
         const formData = new FormData();

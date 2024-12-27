@@ -1,13 +1,8 @@
 {
-  "baseUrl": "https://dev.delekhomes.com",
-
-"validationHP": {
-    "featuredListingsPriceUrl": "/featured-listings?price=500000-10000000&city=New+York",
-    "searchResult": "Luxury Apartment",
-    "selectedBedrooms":  "3",
-    "propertyPrice": "$ 500,000",
-     
     "propertyDetails": {
+      "searchResult": "Luxury Apartment",
+      "selectedBedrooms":  "3",
+      "propertyPrice": "$ 500,000",
       "address": "123 Main Street",
       "askingPrice": "Asking Price: $ 500,000",
       "squareFeet": "Square Feet: 2000",
@@ -19,4 +14,4 @@
       "description": "Spacious apartment in NYC"
     }
   }
-}
+

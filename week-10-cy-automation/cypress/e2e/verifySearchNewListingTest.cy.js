@@ -2,13 +2,13 @@ import homePage from "../page_objects/homePage";
 import featuredListingsPage from "../page_objects/featuredListingsPage";
 
 describe("Testing Home page search functionality ", () => {
-  let verificationTexts;
+  let validationMessages;
   
   beforeEach(function () {
     cy.visit("/");
     cy.errorHandler();
-    cy.fixture("verificationTexts.json").then((data) => {
-      verificationTexts = data;
+    cy.fixture("validationMessages.json").then((data) => {
+      validationMessages = data;
     });
   });
 
@@ -17,7 +17,7 @@ describe("Testing Home page search functionality ", () => {
     homePage.startSearchBtn.click();
     featuredListingsPage.listedPropt.should(
       "contain.text",
-      verificationTexts.validationHP.searchResult
+      validationMessages.propertyDetails.searchResult
     );
   });
   it("Should search by bedrooms", () => {
@@ -26,15 +26,15 @@ describe("Testing Home page search functionality ", () => {
     homePage.startSearchBtn.click();
     featuredListingsPage.selectedBedroomsVal.should(
       "contain.text",
-      verificationTexts.validationHP.selectedBedrooms
+      validationMessages.propertyDetails.selectedBedrooms
     );
   });
 
   it("Should search by price", () => {
-    cy.visit(verificationTexts.validationHP.featuredListingsPriceUrl);
+    cy.visit("/featured-listings?price=500000-10000000&city=New+York");
     featuredListingsPage.propertyPrc.should(
       "contain.text",
-      verificationTexts.validationHP.propertyPrice
+      validationMessages.propertyDetails.propertyPrice
     );
   });
 
@@ -43,7 +43,7 @@ describe("Testing Home page search functionality ", () => {
     homePage.startSearchBtn.click();
     featuredListingsPage.moreInfoBtn.click();
 
-    const expectedDetails = verificationTexts.validationHP.propertyDetails;
+    const expectedDetails = validationMessages.propertyDetails;
     featuredListingsPage.listingDtls.within(() => {
       cy.wrap(Object.values(expectedDetails)).each((value) => {
         cy.contains(value).should("be.visible");

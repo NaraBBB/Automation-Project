@@ -8,7 +8,8 @@ describe("Create a New Listing via API", () => {
   });
 
   it("Should create listing", function () {
-    cy.fixture("homeAloneHouse.png", "binary").then((Image) => {
+    
+    cy.fixture("beautifulHouse.png", "binary").then((Image) => {
       const blob = Cypress.Blob.binaryStringToBlob(Image);
 
       const formData = new FormData();
