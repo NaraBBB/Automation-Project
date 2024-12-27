@@ -26,7 +26,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd week-10-cy-automation
+          cd ./week-10-cy-automation
           npm install
 
 
