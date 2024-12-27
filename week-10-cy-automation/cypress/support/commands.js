@@ -13,4 +13,4 @@ Cypress.Commands.add('errorHandler', () => {
   });
 });
 
-import 'cypress-file-upload';
+
