@@ -13,18 +13,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+     
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
+
 
       - name: Install dependencies
         run: |
           cd week-10-cy-automation
           npm install
 
+
       - name: Run Cypress tests
         uses: cypress-io/github-action@v4
 
      
-    
+
