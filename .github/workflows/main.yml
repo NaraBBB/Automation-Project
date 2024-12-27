@@ -1,22 +1,43 @@
 name: E2E on Chrome
 
 on:
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Ignore it for now'
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
+      # Step 1: Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 6: Run Cypress tests
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v4
+
+      # Step 7: (Optional) Upload Cypress artifacts (e.g., screenshots/videos)
+      - name: Upload Cypress Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-artifacts
+          path: cypress/screenshots/
+
+      # Step 8: (Optional) Archive test results
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-results
+          path: cypress/results/
