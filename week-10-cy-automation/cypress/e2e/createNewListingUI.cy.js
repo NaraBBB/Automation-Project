@@ -16,7 +16,7 @@ describe("Create a New Listing via UI", () => {
       "New York",
       "123 Main Street",
       "10001",
-      "luxuryApartment.png",
+      "images/luxuryApartment.png",
       "500000",
       "3",
       "2",
