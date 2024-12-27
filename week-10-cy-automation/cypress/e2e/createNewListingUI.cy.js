@@ -6,7 +6,7 @@ describe("Create a New Listing via UI", () => {
     cy.log_in();
   });
 
-  it("should allow a user to create a new real estate listing", function () {
+  it("Should allow a user to create a new real estate listing", function () {
     cy.visit("/dashboard/real-estate/new");
     cy.wait(1000);
 
