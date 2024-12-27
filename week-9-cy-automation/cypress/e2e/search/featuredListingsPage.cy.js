@@ -1,19 +1,18 @@
 import featuredListingsPage from "../../page_objects/featuredListingsPage";
 
 describe("Testing Listing page", () => {
-  let verificationTexts;
+  let  validateListings;
 
   before(function () {
-    cy.fixture("verificationTexts.json").then((data) => {
-      verificationTexts = data;
+    cy.fixture("listingDetails.json").then((data) => {
+      validateListings = data;
     });
   });
 
   beforeEach(function () {
-    cy.visit(
-      `${verificationTexts.baseUrl}${verificationTexts.featuredListUrl}`
-    );
+    cy.visit("/featured-listings");
     cy.errorHandler();
+    featuredListingsPage.darkTheme.click();
   });
 
   it("Should search by keyword", () => {
@@ -21,7 +20,7 @@ describe("Testing Listing page", () => {
     featuredListingsPage.startSearchBtn.click();
     featuredListingsPage.listedPropt.should(
       "contain.text",
-      verificationTexts.validationLP.searchResult
+      validateListings.listingPageListingDetails.searchResult
     );
   });
 
@@ -31,14 +30,14 @@ describe("Testing Listing page", () => {
     featuredListingsPage.startSearchBtn.click();
     featuredListingsPage.selectedBedroomsVal.should(
       "contain.text",
-      verificationTexts.validationLP.selectedBedrooms
+      validateListings.listingPageListingDetails.selectedBedrooms
     );
   });
 
   it("Should search by price", () => {
-    cy.visit(verificationTexts.validationLP.featuredListingsPriceUrl);
+    cy.visit("/featured-listings?price=500000-10000000&city=Niles");
     featuredListingsPage.propertyPrc
-      .contains(verificationTexts.validationLP.propertyPrice)
+      .contains(validateListings.listingPageListingDetails.propertyPrice)
       .should("be.visible");
   });
 
@@ -47,7 +46,7 @@ describe("Testing Listing page", () => {
     featuredListingsPage.startSearchBtn.click();
     featuredListingsPage.moreInfoBtn.click();
 
-    const expectedDetails = verificationTexts.validationLP.propertyDetails;
+    const expectedDetails = validateListings.listingPageListingDetails;
     featuredListingsPage.listingDtls.within(() => {
       cy.wrap(Object.values(expectedDetails)).each((value) => {
         cy.contains(value).should("be.visible");
