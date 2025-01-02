@@ -1,7 +1,7 @@
 import featuredListingsPage from "../../page_objects/featuredListingsPage";
 
 describe("Testing Listing page", () => {
-  let  validateListings;
+  let validateListings;
 
   before(function () {
     cy.fixture("listingDetails.json").then((data) => {
@@ -45,7 +45,6 @@ describe("Testing Listing page", () => {
     featuredListingsPage.cityInp.type("Niles", { force: true });
     featuredListingsPage.startSearchBtn.click();
     featuredListingsPage.moreInfoBtn.click();
-
     const expectedDetails = validateListings.listingPageListingDetails;
     featuredListingsPage.listingDtls.within(() => {
       cy.wrap(Object.values(expectedDetails)).each((value) => {

@@ -13,13 +13,10 @@ class LoginPage {
     if (email) {
       this.emailInput.type(email);
     }
-    
-    if (password) { // Skip typing if password is null or undefined
+    if (password) { 
       this.passwordInput.type(password);
     }
-  
     this.loginBtn.click();
   }
-  
 }
 export default new LoginPage();

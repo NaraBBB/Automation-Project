@@ -45,7 +45,7 @@ describe("Testing Home page", () => {
   it("Should search by city", () => {
     homePage.cityInp.type("Elgin").click();
     homePage.startSearchBtn.click();
-   featuredListingsPage.moreInfoBtn.click();
+    featuredListingsPage.moreInfoBtn.click();
 
     const expectedDetails = validateListings.homePageListingDetails;
     featuredListingsPage.listingDtls.within(() => {
@@ -55,4 +55,3 @@ describe("Testing Home page", () => {
     });
   });
 });
-
