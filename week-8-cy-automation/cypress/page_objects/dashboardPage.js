@@ -1,4 +1,4 @@
-class Dashboard {
+class DashboardPage {
   get userIconMenu() {
     return cy.get(' button [class="MuiAvatar-img css-1hy9t21"]');
   }
@@ -9,4 +9,4 @@ class Dashboard {
     return cy.get("li[role='menuitem']");
   }
 }
-export default new Dashboard();
+export default new DashboardPage();

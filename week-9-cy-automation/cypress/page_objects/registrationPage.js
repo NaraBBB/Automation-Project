@@ -1,4 +1,5 @@
 class RegistrationPage {
+  
   get regstFirstNameInp() {
     return cy.get('[name="firstName"]');
   }

@@ -1,4 +1,8 @@
 class HomePage {
+
+  get darkTheme() {
+    return cy.get('[type="checkbox"]');
+  }
   get homePageLoginBtn() {
     return cy.get('[href="/auth/login"]');
   }

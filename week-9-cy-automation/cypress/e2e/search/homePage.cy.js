@@ -2,17 +2,18 @@ import homePage from "../../page_objects/homePage";
 import featuredListingsPage from "../../page_objects/featuredListingsPage";
 
 describe("Testing Home page", () => {
-  let verificationTexts;
+  let validateListings;
 
   before(function () {
-    cy.fixture("verificationTexts.json").then((data) => {
-      verificationTexts = data;
+    cy.fixture("listingDetails.json").then((data) => {
+      validateListings = data;
     });
   });
 
   beforeEach(function () {
-    cy.visit(verificationTexts.baseUrl);
+    cy.visit("/");
     cy.errorHandler();
+    homePage.darkTheme.click();
   });
 
   it("Should search by keyword", () => {
@@ -20,7 +21,7 @@ describe("Testing Home page", () => {
     homePage.startSearchBtn.click();
     featuredListingsPage.listedPropt.should(
       "contain.text",
-      verificationTexts.validationHP.searchResult
+      validateListings.homePageListingDetails.searchResult
     );
   });
 
@@ -30,14 +31,14 @@ describe("Testing Home page", () => {
     homePage.startSearchBtn.click();
     featuredListingsPage.selectedBedroomsVal.should(
       "contain.text",
-      verificationTexts.validationHP.selectedBedrooms
+      validateListings.homePageListingDetails.selectedBedrooms
     );
   });
 
   it("Should search by price", () => {
-    cy.visit(verificationTexts.validationHP.featuredListingsPriceUrl);
+    cy.visit("/featured-listings?price=500000-10000000&city=Elgin");
     featuredListingsPage.propertyPrc
-      .contains(verificationTexts.validationHP.propertyPrice)
+      .contains(validateListings.homePageListingDetails.propertyPrice)
       .should("be.visible");
   });
 
@@ -46,7 +47,7 @@ describe("Testing Home page", () => {
     homePage.startSearchBtn.click();
     featuredListingsPage.moreInfoBtn.click();
 
-    const expectedDetails = verificationTexts.validationHP.propertyDetails;
+    const expectedDetails = validateListings.homePageListingDetails;
     featuredListingsPage.listingDtls.within(() => {
       cy.wrap(Object.values(expectedDetails)).each((value) => {
         cy.contains(value).should("be.visible");

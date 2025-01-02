@@ -12,11 +12,12 @@ const userData = {
 };
 
 describe("Registration Tests", () => {
+  
   beforeEach(() => {
     cy.visit("/");
   });
 
-  it("Should successfully register a new user", function () {
+  it("Should register a new user and log out successfully", function () {
     homePage.homePageRegisterBtn.click();
     registrationPage.registerNewUser(
       userData.firstName,
@@ -29,6 +30,9 @@ describe("Registration Tests", () => {
     dashboardPage.firstNameInp.should("have.value", userData.firstName);
     dashboardPage.lastNameInp.should("have.value", userData.lastName);
     dashboardPage.emailInp.should("have.value", userData.email);
+    dashboardPage.userIconMenu.click();
+    dashboardPage.logoutBtn.click();
+    cy.url().should("include", "/login");
   });
 
   it("Should successfully register a new user and login after registration", function () {
@@ -36,4 +40,4 @@ describe("Registration Tests", () => {
     loginPage.loginMethod(userData.email, userData.password);
     cy.url().should("include", "dashboard/user/profile");
   });
-});
+  });

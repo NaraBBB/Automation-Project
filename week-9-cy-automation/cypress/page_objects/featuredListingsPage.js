@@ -1,4 +1,8 @@
 class FeaturedListingsPage {
+
+  get darkTheme() {
+    return cy.get('[type="checkbox"]');
+  }
     get searchListInp() {
       return cy.get('input[type="text"]').first();
     }
@@ -25,7 +29,7 @@ class FeaturedListingsPage {
       return cy.contains("More Info");
     }
     get propertyPrc() {
-      return cy.get('[class="MuiBox-root css-dc9kff"]');
+      return cy.get(".MuiPaper-rounded div:contains($)");
     }
     get listingDtls() {
       return cy.get('[class*="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-8 MuiGrid-grid-sm-12 MuiGrid-grid-md-8"]').first();

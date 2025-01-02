@@ -1,4 +1,5 @@
 class DashboardPage {
+  
   get hamburgerMenuBtn() {
     return cy.get(".MuiBox-root.css-0.iconify.iconify--eva");
   }

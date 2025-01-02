@@ -6,7 +6,7 @@ describe("User Logout Functionality", () => {
     cy.visit("/dashboard/user/profile");
   });
 
-  it.only("Should log out successfully and redirect  to the main page", function () {
+  it("Should log out successfully and redirect  to the main page", function () {
     dashboardPage.userIconMenu.click();
     dashboardPage.logoutBtn.click();
     cy.url().should("includes", "/auth/login");
