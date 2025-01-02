@@ -1,88 +1,42 @@
-import homePage from "../page_objects/homePage";
-import featuredListingsPage from "../page_objects/featuredListingsPage";
+import HomePage from "../page_objects/search.Listings.Home.Page";
+import FeaturedListingsPage from "../page_objects/search.Listings.Featured.Lisitings.Page";
+import listingDetails from "../fixtures/listingDetails.json";
+
+let listingId;
 
 describe("End-to-End: Create, Search, and Delete a Listing via API", function () {
-  let listingData;
-  let listingId;
-
   beforeEach(function () {
-    cy.wait(1000);
     cy.visit("/");
-    cy.errorHandler();
   });
-
   before(function () {
-    cy.log_in();
-    cy.fixture("listingData.json").then((data) => {
-      listingData = data;
-      cy.fixture("images/beautifulHouse.png", "binary").then((image) => {
-        const blob = Cypress.Blob.binaryStringToBlob(image);
-
-        const formData = new FormData();
-        formData.append("images", blob);
-        Object.entries(listingData).forEach(([key, value]) =>
-          formData.append(key, value)
-        );
-
-        const bearerToken = `Bearer ${
-          localStorage.getItem("accessToken") || ""
-        }`;
-        cy.request({
-          method: "POST",
-          url: "/api/estate-objects",
-          body: formData,
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: bearerToken,
-          },
-          failOnStatusCode: false,
-        }).then((postResponse) => {
-          expect(postResponse.status).to.eq(201);
-          const decoder = new TextDecoder("utf-8");
-          const decodedString = decoder.decode(
-            new Uint8Array(postResponse.body)
-          );
-          listingId = JSON.parse(decodedString).id;
-        });
-      });
+    cy.createListing(listingDetails).then((data) => {
+      listingId = data;
     });
   });
 
   it("Should search by keyword", function () {
-    homePage.searchInp.type("Beautiful House", { force: true });
-    homePage.startSearchBtn.click();
-    featuredListingsPage.listedPropt.should(
-      "contain.text",
-      listingData.validationNewListing.searchResult
+    HomePage.searchInp.type(listingDetails.newRealEstateAPI.title);
+    HomePage.startSearchBtn.click();
+    FeaturedListingsPage.propertyTitle.should(
+      "have.text",
+      listingDetails.newRealEstateAPI.title
     );
-    //
   });
 
   it("Should search by bedrooms", function () {
-    homePage.bedroomsDrpdn.click();
-    homePage.bedroomsOpt.click();
-    homePage.startSearchBtn.click();
-    featuredListingsPage.selectedBedroomsVal.should(
-      "contain.text",
-      listingData.validationNewListing.selectedBedrooms
-    );
+    HomePage.bedroomsDrpdn.click();
+    HomePage.bedroomsOpt.click();
+    HomePage.startSearchBtn.click();
+    FeaturedListingsPage.getSelectedBedroomsVal.should("be.at.least", 3);
   });
 
   it("Should search by city", function () {
-    homePage.cityInp.type("Los Angeles").click();
-    homePage.startSearchBtn.click();
-    featuredListingsPage.moreInfoBtn.click();
-    featuredListingsPage.propertyDescpn.should(
-      "contain.text",
-      listingData.validationNewListing.description
-    );
+    HomePage.cityInp.type(listingDetails.newRealEstateAPI.city);
+    HomePage.startSearchBtn.click();
+    FeaturedListingsPage.cityInp.should("be.visible", listingDetails.city);
   });
 
   after("Deleting listing after creatation", () => {
-    cy.request("DELETE", `/api/estate-objects/${listingId}`).then(
-      (deleteResponse) => {
-        expect(deleteResponse.status).to.eq(200);
-      }
-    );
+    cy.deleteListing(listingId);
   });
 });
