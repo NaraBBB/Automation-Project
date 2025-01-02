@@ -1,5 +1,5 @@
 import homePage from "../../page_objects/homePage";
-import listingPage from "../../page_objects/listingPage";
+import featuredListingsPage from "../../page_objects/FeaturedListingsPage";
 
 describe("Testing Home page", () => {
   beforeEach(function () {

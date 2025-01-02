@@ -1,4 +1,4 @@
-import featuredListingsPage from "../../page_objects/featuredListingsPage";
+import featuredListingsPage from "../../page_objects/FeaturedListingsPage";
 
 describe("Testing Listing page", () => {
   beforeEach(function () {
