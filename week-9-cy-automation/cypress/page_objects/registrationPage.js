@@ -17,7 +17,6 @@ class RegistrationPage {
   get registerBtn() {
     return cy.get('[type="submit"]');
   }
-
   registerMethod(firstName, lastName, email, password) {
     this.regstFirstNameInp.type(firstName);
     this.regstLastNameInp.type(lastName);

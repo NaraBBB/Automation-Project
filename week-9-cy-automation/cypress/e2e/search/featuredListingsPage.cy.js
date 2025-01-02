@@ -1,7 +1,7 @@
 import featuredListingsPage from "../../page_objects/featuredListingsPage";
 
 describe("Testing Listing page", () => {
-  let verificationTexts;
+  let validateListings;
 
   before(function () {
     cy.fixture("verificationTexts.json").then((data) => {
@@ -46,8 +46,7 @@ describe("Testing Listing page", () => {
     featuredListingsPage.cityInp.type("Niles", { force: true });
     featuredListingsPage.startSearchBtn.click();
     featuredListingsPage.moreInfoBtn.click();
-
-    const expectedDetails = verificationTexts.validationLP.propertyDetails;
+    const expectedDetails = validateListings.listingPageListingDetails;
     featuredListingsPage.listingDtls.within(() => {
       cy.wrap(Object.values(expectedDetails)).each((value) => {
         cy.contains(value).should("be.visible");
