@@ -1,0 +1,42 @@
+
+{
+  "newRealEstateAPI": {
+  "title": "Beautiful House",
+  "address": "123 Main Street",
+  "city": "Los Angeles",
+  "state": "CA",
+  "zipCode": "90001",
+  "price": 750000,
+  "bedrooms": 3,
+  "bathrooms": 2,
+  "garage": 1,
+  "sqft": 2000,
+  "lotSize": 8000,
+  "isPublished": true,
+  "description": "A lovely home with modern amenities."
+} ,
+
+"newRealEstateUI": {
+      "title": "Luxury Apartment",
+      "description": "Spacious apartment in NYC",
+      "city": "New York",
+      "address": "123 Main Street",
+      "zipCode": "10001",
+      "imagePath": "images/luxuryApartment.png",
+      "price": "500000",
+      "bedrooms": "3",
+      "bathrooms": "2",
+      "garage": "1",
+      "squareFeet": "2000",
+      "lotSize": "5000",
+"listingInfo": [
+  "Asking Price: $ 500,000",
+  "Square Feet: 2000",
+  "Lot Size: 5000",
+  "Garage: 1",
+  "Bedrooms: 3",
+  "Bathrooms: 2",
+  "Realtor: Narachan B"
+]
+    }
+}
