@@ -13,7 +13,7 @@ class LoginPage {
     if (email) {
       this.emailInput.type(email);
     }
-    if (password) { 
+    if (password) {
       this.passwordInput.type(password);
     }
     this.loginBtn.click();
