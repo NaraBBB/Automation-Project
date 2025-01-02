@@ -20,4 +20,6 @@ jobs:
     - name: Cypress run
       uses: cypress-io/github-action@v6.6.1
       with:
-        working-directory: .
+        working-directory: ./week-10-cy-automation
+        record: false
+        config-file: cypress.config.js
