@@ -22,8 +22,7 @@ jobs:
       uses: cypress-io/github-action@v6.6.1
       with:
 
-        working-directory: ./week-9-cy-automation
+        working-directory: ./week-10-cy-automation
         record: false
         config-file: cypress.config.js
 
-      
