@@ -1,28 +1,34 @@
-
 name: Cypress Tests
-
 on:
   workflow_dispatch:
     inputs:
       branch:
-        description: 'new branch test'
+        description: "new branch test"
         required: false
   pull_request:
     types: [opened, reopened, edited, synchronize]
-
 jobs:
   Cypress-Run:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4.1.1
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+      
+      - name: Cypress run
+        uses: cypress-io/github-action@v6.6.1
+        with:
+          working-directory: ./week-10-cy-automation
+          record: false
+          config-file: cypress.config.js
 
-    - name: Cypress run
-      uses: cypress-io/github-action@v6.6.1
-      with:
-
-        working-directory: ./week-10-cy-automation
-        record: false
-        config-file: cypress.config.js
-
+      - name: Notify Slack
+        if: always()
+        uses: slackapi/slack-github-action@v1
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }} # Ensure this secret is set in GitHub
+        with:
+          channel-id: ${{ secrets.SLACK_CHANNEL_ID }} # Replace with actual Slack channel ID
+          payload: |
+           {
+            "text": "Cypress Tests completed for ${{ github.event_name }} on branch ${{ github.ref_name }}: ${{ job.status }}"
+           }
